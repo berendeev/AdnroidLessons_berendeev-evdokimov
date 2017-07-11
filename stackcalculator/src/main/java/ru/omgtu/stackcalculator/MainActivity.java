@@ -154,6 +154,30 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+        View.OnClickListener OCL_btn_point = new View.OnClickListener()
+        {
+            @Override
+
+            public void onClick(View view)
+            {
+                double forcheck;
+                try
+                {
+                    text.setText(text.getText()+".");
+                    forcheck = Double.parseDouble((String)text.getText());
+                }
+                catch (Exception exc)
+                {
+                    //ErrorSeconPoint
+                    String buf = (String) text.getText();
+                    buf = buf.substring(0, buf.length() - 1);
+                    text.setText(buf);
+                }
+
+
+            }
+        };
+
         btn_0.setOnClickListener(OCL_btn_number);
         btn_1.setOnClickListener(OCL_btn_number);
         btn_2.setOnClickListener(OCL_btn_number);
@@ -174,5 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
         btn_clearBack.setOnClickListener(OCL_btn_clearLast);
         btn_clearAll.setOnClickListener(OCL_btn_clearALL);
+
+        btn_point.setOnClickListener(OCL_btn_point);
     }
 }

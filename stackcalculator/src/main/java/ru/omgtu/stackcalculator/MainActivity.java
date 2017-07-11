@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn_divide;
     Button btn_equal;
     Button btn_point;
+    Button btn_clearBack;
+    Button btn_clearAll;
 
     double firstArgument;
     double secondArgument;
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
         btn_divide = (Button) findViewById(R.id.btn_divide);
         btn_equal = (Button) findViewById(R.id.btn_equal);
         btn_point = (Button) findViewById(R.id.btn_point);
+        btn_clearBack = (Button) findViewById(R.id.btn_clearBack);
+        btn_clearAll = (Button) findViewById(R.id.btn_clearAll);
 
 
         View.OnClickListener OCL_btn_number = new View.OnClickListener()
@@ -79,7 +83,6 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener OCL_btn_operation = new View.OnClickListener()
         {
-            //double firstArgument;
             @Override
             public void onClick(View view)
             {
@@ -99,8 +102,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                if(text.getText()=="")
+                {
+                   secondArgument = 0;
+                }
+                else
+                {
+                    secondArgument = Double.parseDouble((String) text.getText());
+                }
 
-                secondArgument = Double.parseDouble((String)text.getText());
                 switch (arithmeticExpression)
                 {
                     case R.id.btn_plus: answer = firstArgument + secondArgument;break;
@@ -115,6 +125,32 @@ public class MainActivity extends AppCompatActivity {
                     default: answer = 0;break;
                 }
                 text.setText("" + answer);
+            }
+        };
+
+        View.OnClickListener OCL_btn_clearLast = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                if(text.length()>1)
+                {
+                    String buf = (String) text.getText();
+                    buf = buf.substring(0, buf.length() - 1);
+                    text.setText(buf);
+                }
+                else text.setText("");
+            }
+        };
+
+        View.OnClickListener OCL_btn_clearALL = new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                text.setText("");
+                firstArgument = 0;
+                secondArgument = 0;
             }
         };
 
@@ -135,5 +171,8 @@ public class MainActivity extends AppCompatActivity {
         btn_divide.setOnClickListener(OCL_btn_operation);
 
         btn_equal.setOnClickListener(OCL_btn_calculate);
+
+        btn_clearBack.setOnClickListener(OCL_btn_clearLast);
+        btn_clearAll.setOnClickListener(OCL_btn_clearALL);
     }
 }

@@ -1,10 +1,12 @@
 package ru.omgtu.stackcalculator;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     TextView text;
@@ -119,12 +121,16 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.btn_divide:
                         if (secondArgument == 0)
                         {
+                            Toast.makeText(getApplicationContext(),"Деление на 0", Toast.LENGTH_SHORT).show();
                             break;
                         }
                         answer = firstArgument / secondArgument;break;
                     default: answer = 0;break;
                 }
-                text.setText("" + answer);
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("result",""+answer);
+                startActivity(intent);
+                //text.setText("" + answer);
             }
         };
 
